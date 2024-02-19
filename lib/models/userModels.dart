@@ -7,6 +7,7 @@ class UserModel {
   final String userDeviceToken;
   final String country;
   final String userAddress;
+  final String city;
   final String street;
   final bool isAdmin;
   final bool isActive;
@@ -21,6 +22,7 @@ class UserModel {
       required this.userDeviceToken,
       required this.country,
       required this.userAddress,
+      required this.city,
       required this.street,
       required this.isAdmin,
       required this.isActive,
@@ -36,6 +38,7 @@ class UserModel {
       'userDeviceToken': userDeviceToken,
       'country': country,
       'userAddress': userAddress,
+      'city': city,
       'street': street,
       'isAdmin': isAdmin,
       'isActive': isActive,
@@ -53,6 +56,7 @@ class UserModel {
         userDeviceToken: json['userDeviceToken'],
         country: json['country'],
         userAddress: json['userAddress'],
+        city: json['city'],
         street: json['street'],
         isAdmin: json['isAdmin'],
         isActive: json['isActive'],

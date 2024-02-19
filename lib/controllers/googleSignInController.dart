@@ -37,6 +37,7 @@ class GoogleSignInController extends GetxController {
           userDeviceToken: '',
           country: '',
           userAddress: '',
+          city: '',
           street: '',
           isAdmin: false,
           isActive: true,

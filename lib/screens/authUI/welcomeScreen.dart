@@ -1,4 +1,5 @@
 import 'package:e_comm/controllers/googleSignInController.dart';
+import 'package:e_comm/screens/authUI/signInScreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20)),
             child: TextButton.icon(
                 onPressed: () {
-                  
+                  Get.to(()=> const SignInScreen());
                 },
                 icon: const Icon(
                   Icons.email,
