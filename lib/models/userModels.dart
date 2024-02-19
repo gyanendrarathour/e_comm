@@ -8,9 +8,9 @@ class UserModel {
   final String country;
   final String userAddress;
   final String street;
-  final String isAdmin;
-  final String isActive;
-  final String createdOn;
+  final bool isAdmin;
+  final bool isActive;
+  final DateTime createdOn;
 
   UserModel(
       {required this.uId,
