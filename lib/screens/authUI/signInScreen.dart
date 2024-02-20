@@ -1,9 +1,15 @@
+import 'package:e_comm/controllers/signInController.dart';
 import 'package:e_comm/screens/authUI/signUpScreen.dart';
+import 'package:e_comm/screens/userPanel/mainScreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lottie/lottie.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -14,6 +20,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final SignInController _signInController = Get.put(SignInController());
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
@@ -44,6 +54,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       cursorColor: AppConstant.appSecondaryColor,
                       decoration: InputDecoration(
@@ -59,16 +70,24 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: Get.width,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      obscureText: true,
-                      cursorColor: AppConstant.appSecondaryColor,
-                      decoration: InputDecoration(
-                          hintText: 'Password',
-                          prefixIcon: const Icon(Icons.password),
-                          suffixIcon: const Icon(Icons.visibility_off),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0))),
-                    ),
+                    child: Obx(() => TextFormField(
+                          controller: passwordController,
+                          obscureText: SignInController.isPasswordVisible.value,
+                          keyboardType: TextInputType.visiblePassword,
+                          cursorColor: AppConstant.appSecondaryColor,
+                          decoration: InputDecoration(
+                              hintText: 'Password',
+                              prefixIcon: const Icon(Icons.password),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    SignInController.isPasswordVisible.toggle();
+                                  },
+                                  icon: SignInController.isPasswordVisible.value
+                                      ? const Icon(Icons.visibility_off)
+                                      : const Icon(Icons.visibility)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0))),
+                        )),
                   )),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -91,21 +110,48 @@ class _SignInScreenState extends State<SignInScreen> {
                     color: AppConstant.appMainColor,
                     borderRadius: BorderRadius.circular(20)),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      String email = emailController.text.trim();
+                      String password = passwordController.text.trim();
+                      if (email.isEmpty || password.isEmpty) {
+                        Get.snackbar('Error', 'Please enter all the details');
+                      } else {
+                        UserCredential? userCredential =
+                            await SignInController()
+                                .signInWithEmail(email, password);
+                        if (userCredential != null) {
+                          if (userCredential.user!.emailVerified) {
+                            Get.snackbar('Success', 'Loggedin successfully');
+                            Get.offAll(()=> const MainScreen());
+                          } else {
+                            Get.snackbar('Error', 'Please verify your email');
+                          }
+                        } else {
+                          Get.snackbar('Error', 'Please try again');
+                        }
+                      }
+                    },
                     child: const Text(
                       'Sign in',
                       style: TextStyle(
                           fontSize: 17, color: AppConstant.appTextColor),
                     )),
               ),
-              SizedBox(height: Get.height/20,),
+              SizedBox(
+                height: Get.height / 20,
+              ),
               GestureDetector(
                 onTap: () => Get.offAll(const SignUpScreen()),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have an account? "),
-                    Text('Sign Up', style: TextStyle(fontWeight: FontWeight.bold, color: AppConstant.appSecondaryColor),)
+                    Text(
+                      'Sign Up',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppConstant.appSecondaryColor),
+                    )
                   ],
                 ),
               )

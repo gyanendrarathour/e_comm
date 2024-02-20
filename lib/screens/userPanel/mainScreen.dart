@@ -1,5 +1,6 @@
 import 'package:e_comm/screens/authUI/welcomeScreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -18,6 +19,8 @@ class MainScreen extends StatelessWidget {
           actions: [
             IconButton(onPressed: ()async{
               GoogleSignIn googleSignIn = GoogleSignIn();
+              FirebaseAuth _auth = FirebaseAuth.instance;
+              await _auth.signOut();
               await googleSignIn.signOut();
               Get.offAll(()=>WelcomeScreen());
             }, icon: const Icon(Icons.logout))
