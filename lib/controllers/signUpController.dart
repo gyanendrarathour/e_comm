@@ -11,7 +11,11 @@ class SignUpController extends GetxController {
   // For password visibility
   static var isPasswordVisible = false.obs;
 
+<<<<<<< HEAD
   Future<UserCredential?> signUpWithEmail(String userEmail, userName, userPhone, userCity,
+=======
+  Future<UserCredential?> signInWithEmail(String userEmail, userName, userPhone, userCity,
+>>>>>>> 44a9ef8ec374d4dbc21a39d1e66b3cdda32b4da9
       userPassword, userDeviceToken) async {
         EasyLoading.show(status: 'Please wait...');
 
