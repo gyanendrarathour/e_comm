@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import 'dart:ffi';
-
->>>>>>> 44a9ef8ec374d4dbc21a39d1e66b3cdda32b4da9
 import 'package:e_comm/controllers/signUpController.dart';
 import 'package:e_comm/screens/authUI/signInScreen.dart';
 import 'package:e_comm/screens/authUI/welcomeScreen.dart';
@@ -11,14 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
-=======
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:lottie/lottie.dart';
->>>>>>> 44a9ef8ec374d4dbc21a39d1e66b3cdda32b4da9
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -178,11 +165,7 @@ class _SignInScreenState extends State<SignUpScreen> {
                           Get.snackbar('Error', 'Please enter all the details');
                         } else {
                           UserCredential? userCredential =await SignUpController()
-<<<<<<< HEAD
                               .signUpWithEmail(email, userName, phone,
-=======
-                              .signInWithEmail(email, userName, phone,
->>>>>>> 44a9ef8ec374d4dbc21a39d1e66b3cdda32b4da9
                                   city, password, userDeviceToken);
                                   if(userCredential!=null){
                                     Get.snackbar('Verification Email Sent', 'Please check your email');

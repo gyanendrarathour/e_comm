@@ -1,4 +1,6 @@
+import 'package:e_comm/controllers/getUserDataController.dart';
 import 'package:e_comm/controllers/signInController.dart';
+import 'package:e_comm/screens/adminPanel/adminMainScreen.dart';
 import 'package:e_comm/screens/authUI/signUpScreen.dart';
 import 'package:e_comm/screens/userPanel/mainScreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
@@ -6,10 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lottie/lottie.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -21,6 +19,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final SignInController _signInController = Get.put(SignInController());
+  final GetUserDataController _getUserDataController = Get.put(GetUserDataController());
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -119,10 +119,16 @@ class _SignInScreenState extends State<SignInScreen> {
                         UserCredential? userCredential =
                             await SignInController()
                                 .signInWithEmail(email, password);
+                          var userData = await _getUserDataController.getUserData(userCredential!.user!.uid);
                         if (userCredential != null) {
                           if (userCredential.user!.emailVerified) {
-                            Get.snackbar('Success', 'Loggedin successfully');
-                            Get.offAll(()=> const MainScreen());
+                            if(userData[0]['isAdmin']== true){
+                              Get.offAll(const AdminMainScreen());
+                              Get.snackbar('Success', 'Loggedin successfully', snackPosition: SnackPosition.BOTTOM);
+                            }
+                            else{
+                            Get.snackbar('Success', 'Loggedin successfully', snackPosition: SnackPosition.BOTTOM);
+                            Get.offAll(()=> const MainScreen());}
                           } else {
                             Get.snackbar('Error', 'Please verify your email');
                           }
