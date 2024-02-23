@@ -1,4 +1,5 @@
 import 'package:e_comm/firebase_options.dart';
+import 'package:e_comm/utils/appConstant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'E-Comm',
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(centerTitle: true),
+        appBarTheme: const AppBarTheme(centerTitle: true, foregroundColor: AppConstant.appTextColor, iconTheme: IconThemeData(color: AppConstant.appTextColor)),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
