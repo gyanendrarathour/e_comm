@@ -2,6 +2,7 @@ import 'package:e_comm/utils/appConstant.dart';
 import 'package:e_comm/widgets/bannerWidget.dart';
 import 'package:e_comm/widgets/categoryWidget.dart';
 import 'package:e_comm/widgets/customDrawerWidget.dart';
+import 'package:e_comm/widgets/flashSaleWidget.dart';
 import 'package:e_comm/widgets/headingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
@@ -42,7 +43,8 @@ class _MainScreenState extends State<MainScreen> {
                   headingTitle: 'Flash Sale',
                   headingSubTitle: "According to your budget",
                   onTap: () {},
-                  buttonText: 'See More >>>')
+                  buttonText: 'See More >>>'),
+              const FlashSaleWidget()
             ],
           ),
         ),
