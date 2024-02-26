@@ -1,13 +1,11 @@
-import 'package:e_comm/screens/authUI/welcomeScreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
 import 'package:e_comm/widgets/bannerWidget.dart';
+import 'package:e_comm/widgets/categoryWidget.dart';
 import 'package:e_comm/widgets/customDrawerWidget.dart';
 import 'package:e_comm/widgets/headingWidget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -36,6 +34,12 @@ class _MainScreenState extends State<MainScreen> {
               const BannerWidget(),
               HeadingWidget(
                   headingTitle: 'Categories',
+                  headingSubTitle: "According to your budget",
+                  onTap: () {},
+                  buttonText: 'See More >>>'),
+              const CategoryWidget(),
+              HeadingWidget(
+                  headingTitle: 'Flash Sale',
                   headingSubTitle: "According to your budget",
                   onTap: () {},
                   buttonText: 'See More >>>')

@@ -38,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               children: [
                 isKeyboardVisible
-                    ? SizedBox.shrink()
+                    ? const SizedBox.shrink()
                     : Container(
                         color: AppConstant.appSecondaryColor,
                         child: Center(
