@@ -1,3 +1,4 @@
+import 'package:e_comm/screens/userPanel/allCategoriesSreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
 import 'package:e_comm/widgets/bannerWidget.dart';
 import 'package:e_comm/widgets/categoryWidget.dart';
@@ -36,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
               HeadingWidget(
                   headingTitle: 'Categories',
                   headingSubTitle: "According to your budget",
-                  onTap: () {},
+                  onTap: ()=> Get.to(()=> const AllCategoriesScreen()),
                   buttonText: 'See More >>>'),
               const CategoryWidget(),
               HeadingWidget(
