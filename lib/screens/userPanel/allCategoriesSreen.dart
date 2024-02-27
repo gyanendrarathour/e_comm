@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/models/categoriesModel.dart';
+import 'package:e_comm/screens/userPanel/singleCategoryProductScreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_card/image_card.dart';
@@ -62,17 +64,20 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                         updatedAt: snapshot.data!.docs[index]['updatedAt']);
                     return Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            child: FillImageCard(
-                              borderRadius: 20.0,
-                              width: Get.width/2.3,
-                              heightImage:  Get.height/10.0,
-                              imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
-                              title: Center(
-                                child: Text(
-                                  categoriesModel.categoryName
+                        GestureDetector(
+                          onTap: () => Get.to(()=> SingleCategoryProductScreen(categoryId: categoriesModel.categoryId)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              child: FillImageCard(
+                                borderRadius: 20.0,
+                                width: Get.width/2.3,
+                                heightImage:  Get.height/10.0,
+                                imageProvider: CachedNetworkImageProvider(categoriesModel.categoryImg),
+                                title: Center(
+                                  child: Text(
+                                    categoriesModel.categoryName
+                                  ),
                                 ),
                               ),
                             ),
@@ -81,15 +86,6 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                       ],
                     );
                   })
-
-            // Container(
-            //   height: Get.height / 5,
-            //   child: ListView.builder(
-            //       itemCount: snapshot.data!.docs.length,
-            //       shrinkWrap: true,
-            //       scrollDirection: Axis.horizontal,
-            //       ),
-            // )
             ;
           }
           return Container();
