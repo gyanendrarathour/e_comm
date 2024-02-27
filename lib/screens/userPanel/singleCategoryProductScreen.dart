@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_comm/models/categoriesModel.dart';
 import 'package:e_comm/models/productModel.dart';
 import 'package:e_comm/utils/appConstant.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_card/image_card.dart';
 
+// ignore: must_be_immutable
 class SingleCategoryProductScreen extends StatefulWidget {
   String categoryId;
   SingleCategoryProductScreen({super.key, required this.categoryId});

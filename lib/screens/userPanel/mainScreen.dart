@@ -1,4 +1,5 @@
 import 'package:e_comm/screens/userPanel/allCategoriesSreen.dart';
+import 'package:e_comm/screens/userPanel/allFlashSaleProducts.dart';
 import 'package:e_comm/utils/appConstant.dart';
 import 'package:e_comm/widgets/bannerWidget.dart';
 import 'package:e_comm/widgets/categoryWidget.dart';
@@ -43,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
               HeadingWidget(
                   headingTitle: 'Flash Sale',
                   headingSubTitle: "According to your budget",
-                  onTap: () {},
+                  onTap: () => Get.to(()=>const AllFlashSaleProductsScreen()),
                   buttonText: 'See More >>>'),
               const FlashSaleWidget()
             ],
