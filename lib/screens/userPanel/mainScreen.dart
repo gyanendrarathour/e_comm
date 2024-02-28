@@ -1,6 +1,8 @@
 import 'package:e_comm/screens/userPanel/allCategoriesSreen.dart';
 import 'package:e_comm/screens/userPanel/allFlashSaleProducts.dart';
+import 'package:e_comm/screens/userPanel/allProductsScreen.dart';
 import 'package:e_comm/utils/appConstant.dart';
+import 'package:e_comm/widgets/allProductsWidget.dart';
 import 'package:e_comm/widgets/bannerWidget.dart';
 import 'package:e_comm/widgets/categoryWidget.dart';
 import 'package:e_comm/widgets/customDrawerWidget.dart';
@@ -38,15 +40,21 @@ class _MainScreenState extends State<MainScreen> {
               HeadingWidget(
                   headingTitle: 'Categories',
                   headingSubTitle: "According to your budget",
-                  onTap: ()=> Get.to(()=> const AllCategoriesScreen()),
+                  onTap: () => Get.to(() => const AllCategoriesScreen()),
                   buttonText: 'See More >>>'),
               const CategoryWidget(),
               HeadingWidget(
                   headingTitle: 'Flash Sale',
                   headingSubTitle: "According to your budget",
-                  onTap: () => Get.to(()=>const AllFlashSaleProductsScreen()),
+                  onTap: () => Get.to(() => const AllFlashSaleProductsScreen()),
                   buttonText: 'See More >>>'),
-              const FlashSaleWidget()
+              const FlashSaleWidget(),
+              HeadingWidget(
+                  headingTitle: 'All Products',
+                  headingSubTitle: "According to your budget",
+                  onTap: () => Get.to(()=> const AllProductsScreen()),
+                  buttonText: 'See More >>>'),
+              const AllProductsWidget()
             ],
           ),
         ),

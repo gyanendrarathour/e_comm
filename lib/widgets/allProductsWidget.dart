@@ -1,30 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_comm/utils/appConstant.dart';
+import 'package:e_comm/models/productModel.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_card/image_card.dart';
 
-import '../../models/productModel.dart';
+class AllProductsWidget extends StatelessWidget {
+  const AllProductsWidget({super.key});
 
-class AllFlashSaleProductsScreen extends StatefulWidget {
-  const AllFlashSaleProductsScreen({super.key});
-
-  @override
-  State<AllFlashSaleProductsScreen> createState() => _AllFlashSaleProductsScreenState();
-}
-
-class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
-        title: const Text('All Flash Sale Products'),),
-        body: FutureBuilder(
-        future: FirebaseFirestore.instance.collection('products').where('isSale', isEqualTo: true).get(),
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
+            .collection('products')
+            .where('isSale', isEqualTo: false)
+            .get(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Center(
@@ -50,9 +41,9 @@ class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen>
               physics: const BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 3,
-                crossAxisSpacing: 3,
-                childAspectRatio: 1.29
+                mainAxisSpacing: 5,
+                crossAxisSpacing: 5,
+                childAspectRatio: 0.80
               ),
               itemBuilder: (context, index) {
                     final productData = snapshot.data!.docs[index];
@@ -87,6 +78,7 @@ class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen>
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
+                                footer: Center(child: Text('Rs. ${productModel.fullPrice}')),
                               ),
                             ),
                           ),
@@ -96,7 +88,6 @@ class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen>
                   });
           }
           return Container();
-        }),
-    );
+        });
   }
 }
